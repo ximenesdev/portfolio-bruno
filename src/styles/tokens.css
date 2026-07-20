@@ -51,7 +51,10 @@
   --lh-normal: 1.6;
 
   /* ---- Ritmo / espaçamento ---- */
-  --space-section: clamp(6rem, 14vh, 12rem); /* respiro vertical generoso entre seções */
+  /* respiro vertical entre seções — enxuto o bastante para a seção "enquadrar"
+     ao clicar no menu, sem parecer cortada */
+  --space-section: clamp(3.25rem, 7vh, 5.5rem);
+  --nav-h: 80px; /* altura aproximada do nav fixo (usada no scroll-margin) */
   --container: 1180px;
   --gutter: clamp(1.25rem, 5vw, 4rem);
 

@@ -97,6 +97,11 @@ img {
   padding-block: var(--space-section);
 }
 
+/* âncora "enquadrada": ao pular para uma seção, ela encosta abaixo do nav fixo */
+section[id] {
+  scroll-margin-top: var(--nav-h);
+}
+
 .overline {
   font-size: var(--fs-overline);
   font-weight: 500;
