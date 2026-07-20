@@ -21,7 +21,6 @@ import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
 import Project from "./components/sections/Project";
 import Skills from "./components/sections/Skills";
-import StudyMaterial from "./components/sections/StudyMaterial";
 import Contact from "./components/sections/Contact";
 
 // intensidade do mesh por seção: o Hero é o mais vivo; o resto respira mais.
@@ -30,7 +29,6 @@ const INTENSITY = {
   sobre: 1.0,
   projeto: 0.9,
   skills: 0.95,
-  material: 0.95,
   contato: 1.1,
 };
 
@@ -92,9 +90,13 @@ export default function App() {
   }, [activeId]);
 
   const onNavigate = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    // O recuo do nav fixo vem do scroll-margin-top das seções (CSS), respeitado
+    // tanto pelo Lenis quanto pelo scrollIntoView nativo — sem offset em dobro.
     const lenis = lenisRef.current;
-    if (lenis) lenis.scrollTo(`#${id}`, { offset: 0 });
-    else document.getElementById(id)?.scrollIntoView({ behavior: "auto" });
+    if (lenis) lenis.scrollTo(el);
+    else el.scrollIntoView({ behavior: "auto" });
   };
 
   const theme = sectionThemes[activeId] ?? sectionThemes.hero;
@@ -111,7 +113,6 @@ export default function App() {
         <About />
         <Project />
         <Skills />
-        <StudyMaterial />
         <Contact />
       </main>
     </>
