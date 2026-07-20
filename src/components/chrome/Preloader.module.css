@@ -1,0 +1,48 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background: var(--ink-900);
+  will-change: transform;
+}
+
+.initials {
+  display: flex;
+  font-size: clamp(3.5rem, 12vw, 8rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--text-hi);
+  line-height: 1;
+}
+
+/* cada letra sobe de dentro de um recorte */
+.mask {
+  overflow: hidden;
+  display: inline-block;
+}
+.char {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* trilho + preenchimento âmbar (a única cor do loader — monocromático + 1 acento) */
+.track {
+  position: relative;
+  width: min(240px, 55vw);
+  height: 1px;
+  background: var(--ink-600);
+  overflow: hidden;
+}
+.fill {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--amber), var(--amber-glow));
+  will-change: transform;
+}

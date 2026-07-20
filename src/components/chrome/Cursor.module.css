@@ -1,0 +1,40 @@
+/* Cursor customizado: um ponto exato + um anel de glow que segue com atraso.
+   Ambos ignoram cliques e vivem acima do conteúdo, abaixo do preloader. */
+.dot,
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--text-hi);
+  mix-blend-mode: difference; /* fica visível sobre qualquer cor do mesh */
+}
+
+.ring {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 1px solid rgba(var(--accent-rgb), 0.6);
+  /* glow suave = o "spotlight" que segue o mouse */
+  box-shadow: 0 0 24px 2px rgba(var(--accent-rgb), 0.18);
+  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out),
+    background 0.3s var(--ease-out), border-color 0.3s var(--ease-out), margin 0.3s var(--ease-out);
+}
+
+/* Sobre um elemento interativo, o anel cresce e "engole" o alvo */
+.ring.hover {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background: rgba(var(--accent-rgb), 0.1);
+  border-color: rgba(var(--accent-rgb), 0.35);
+}

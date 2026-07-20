@@ -1,0 +1,128 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1rem, 2.5vw, 1.6rem) var(--gutter);
+  /* leve véu para o texto da nav sobreviver sobre qualquer cor do mesh */
+  background: linear-gradient(180deg, rgba(8, 8, 12, 0.6), transparent);
+  backdrop-filter: blur(2px);
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+  color: var(--text-hi);
+}
+.logo b {
+  color: var(--accent);
+  transition: color var(--dur) var(--ease-out);
+}
+
+/* ---- links desktop ---- */
+.links {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+}
+.link {
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-mid);
+  padding: 0.25rem 0;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.link:hover {
+  color: var(--text-hi);
+}
+.link.active {
+  color: var(--text-hi);
+}
+/* ponto indicador da seção ativa */
+.link.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---- botão do menu mobile ---- */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 30px;
+  padding: 6px 0;
+}
+.burger span {
+  height: 1.5px;
+  width: 100%;
+  background: var(--text-hi);
+  transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast);
+}
+.burger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+.burger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ---- overlay mobile ---- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-nav) - 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: var(--gutter);
+  background: rgba(8, 8, 12, 0.92);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur) var(--ease-out), visibility var(--dur);
+}
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+.overlayLink {
+  font-size: clamp(2rem, 9vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text-mid);
+  padding: 0.35rem 0;
+}
+.overlayLink.active {
+  color: var(--text-hi);
+}
+.overlayLink .idx {
+  font-size: 0.9rem;
+  color: var(--accent);
+  vertical-align: super;
+  margin-right: 0.6rem;
+}
+
+@media (max-width: 720px) {
+  .links {
+    display: none;
+  }
+  .burger {
+    display: flex;
+  }
+}
