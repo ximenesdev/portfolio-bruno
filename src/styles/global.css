@@ -1,0 +1,154 @@
+/*
+ * ESTILOS GLOBAIS
+ * -----------------------------------------------------------------------------
+ * Reset enxuto + base tipográfica + utilitários. Sem framework de utilitário:
+ * CSS à mão com tokens para o site não ter "cara de template".
+ */
+
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* o smooth scroll é do Lenis, não do CSS */
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--text-mid);
+  background: var(--ink-900);
+  /* o mesh é desenhado atrás; esta cor é a base/fallback */
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* No desktop com o cursor customizado, escondemos o ponteiro nativo.
+   A classe é aplicada ao <html> só quando há mouse de verdade (ver Cursor.jsx). */
+html.has-custom-cursor,
+html.has-custom-cursor a,
+html.has-custom-cursor button {
+  cursor: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-hi);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: rgba(var(--accent-rgb), 0.35);
+  color: var(--text-hi);
+}
+
+/* Foco visível e acessível para navegação por teclado */
+:focus-visible {
+  outline: 2px solid var(--accent-glow);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Utilitários de layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  z-index: var(--z-content);
+  padding-block: var(--space-section);
+}
+
+.overline {
+  font-size: var(--fs-overline);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-low);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  font-weight: 300;
+  line-height: var(--lh-normal);
+  color: var(--text-mid);
+  max-width: 60ch;
+}
+
+/* Texto com preenchimento em gradiente do acento (usado com parcimônia, em 1 palavra) */
+.accent-text {
+  background: linear-gradient(120deg, var(--accent), var(--accent-glow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Só para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* A máscara usada nos reveals de texto (linha "sobe" por trás de um recorte).
+   O JS troca para overflow visível se SplitText não rodar (reduced-motion/fallback). */
+.mask-line {
+  overflow: hidden;
+}
+
+/* ---------- Acessibilidade: respeitar prefers-reduced-motion ----------
+   Não é opcional. Aqui zeramos transições/animações CSS. As animações GSAP
+   são desligadas no próprio JS (ver lib/gsap e cada componente). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

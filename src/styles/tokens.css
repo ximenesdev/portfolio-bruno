@@ -1,0 +1,76 @@
+/*
+ * TOKENS DE DESIGN
+ * -----------------------------------------------------------------------------
+ * Única fonte de verdade para cor, tipografia e ritmo do site.
+ * A regra "anti-arco-íris" vive aqui: as 3 cores de acento (âmbar, azul, violeta)
+ * nunca aparecem com peso igual — cada seção elege uma dominante e o mesh de fundo
+ * viaja âmbar -> azul -> violeta conforme o scroll.
+ */
+
+:root {
+  /* ---- Fundos: quase-preto com fundo levemente violeta ---- */
+  --ink-900: #08080c; /* fundo da página, o mais profundo */
+  --ink-800: #0e0d14; /* blocos elevados */
+  --ink-700: #15131e; /* superfície de cards */
+  --ink-600: #201d2c; /* hairlines / bordas */
+
+  /* ---- Texto ---- */
+  --text-hi: #f5f2f7;  /* títulos: contraste altíssimo sobre o ink */
+  --text-mid: #b2abc0; /* parágrafos */
+  --text-low: #6c6680; /* overlines, metadados */
+
+  /* ---- Acentos (core + glow). Sempre acento, nunca bloco sólido saturado ---- */
+  --amber: #e8763c;
+  --amber-glow: #ff9a5a;
+  --blue: #4b82e0;
+  --blue-glow: #74a2f7;
+  --violet: #8a6bd8;
+  --violet-glow: #ac8df2;
+
+  /* ---- Acento "corrente": cada seção reescreve isto e tudo reage junto ---- */
+  --accent: var(--amber);
+  --accent-glow: var(--amber-glow);
+  /* versão em canais r,g,b para compor rgba() de brilhos e bordas */
+  --accent-rgb: 232, 118, 60;
+
+  /* ---- Tipografia (somente Poppins, em todo o site) ---- */
+  --font: "Poppins", system-ui, -apple-system, sans-serif;
+
+  /* Escala fluida com clamp() — tipografia grande e confiante */
+  --fs-display: clamp(3rem, 9vw, 8.5rem);
+  --fs-h1: clamp(2.6rem, 6.5vw, 5rem);
+  --fs-h2: clamp(2.2rem, 5vw, 4rem);
+  --fs-h3: clamp(1.4rem, 2.5vw, 2rem);
+  --fs-lead: clamp(1.15rem, 1.6vw, 1.5rem);
+  --fs-body: clamp(1rem, 1.15vw, 1.125rem);
+  --fs-small: 0.85rem;
+  --fs-overline: 0.8rem;
+
+  --lh-tight: 0.98;
+  --lh-snug: 1.15;
+  --lh-normal: 1.6;
+
+  /* ---- Ritmo / espaçamento ---- */
+  --space-section: clamp(6rem, 14vh, 12rem); /* respiro vertical generoso entre seções */
+  --container: 1180px;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+
+  /* ---- Formas e sombras (sombra autoral, colorida pelo acento — nada de sombra de tutorial) ---- */
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --shadow-soft: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+  --shadow-accent: 0 30px 80px -40px rgba(var(--accent-rgb), 0.45);
+
+  /* ---- Movimento ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.35s;
+  --dur: 0.6s;
+
+  --z-bg: 0;
+  --z-content: 1;
+  --z-nav: 40;
+  --z-cursor: 90;
+  --z-preloader: 100;
+}
