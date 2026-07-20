@@ -1,17 +1,19 @@
 /*
  * CONTEÚDO DO SITE — fonte única de verdade para todo o texto.
  * -----------------------------------------------------------------------------
- * Bruno: é aqui que você edita títulos, textos, links e a lista de PDFs.
+ * Bruno: é aqui que você edita títulos, textos e links.
  * Nenhum componente tem texto "chumbado"; tudo passa por este arquivo.
+ *
+ * Nos parágrafos do "Sobre mim", use **asteriscos** para deixar uma palavra em
+ * negrito (cargos, tempo, instituições) — o componente converte para <strong>.
  */
 
 export const meta = {
   nome: "Bruno Ximenes",
-  // Headline principal (fio condutor do site): vale em dois níveis — o foco
-  // técnico (resiliência) e a virada de carreira.
+  // Selo de disponibilidade — diz "o que eu busco" logo de cara.
+  badge: "Disponível para oportunidades como desenvolvedor Java",
+  // Headline (fio condutor): vale no técnico (resiliência) e na virada de carreira.
   headline: "Construo back-ends que continuam de pé quando uma peça falha.",
-  eyebrow: "Desenvolvedor Java · Back-end resiliente",
-  local: "Ciência da Computação · Brasília",
 };
 
 export const nav = [
@@ -19,30 +21,31 @@ export const nav = [
   { id: "sobre", label: "Sobre" },
   { id: "projeto", label: "Projeto" },
   { id: "skills", label: "Stack" },
-  { id: "material", label: "Material" },
   { id: "contato", label: "Contato" },
 ];
 
 export const hero = {
+  // Uma frase direta: quem eu sou + o que eu faço + stack (sem exigir scroll).
   lead:
-    "Vim do administrativo, virei desenvolvedor e agora ataco engenharia de resiliência com projeto de verdade na mão.",
+    "Estudante de Ciência da Computação (Brasília) em transição de carreira — construo back-ends em Java e Spring Boot, com foco em resiliência.",
 };
 
 export const about = {
   overline: "Sobre mim",
-  titulo: "De planilha e headset a código que resiste a falha.",
-  // Rascunho honesto, sem clichê. Bruno lapida o texto final.
+  titulo: "Do atendimento ao código que resiste a falha.",
+  // Trajetória real, tom profissional. **negrito** destaca cargos/tempo/instituições.
   paragrafos: [
-    "Não cresci programando. Vim do administrativo e do atendimento — telemarketing, suporte, planilha — e num certo ponto decidi que queria construir as coisas, não só operá-las.",
-    "Hoje curso Ciência da Computação (5º semestre) no Centro Universitário do Distrito Federal, em Brasília, e começo como analista de dados no Ministério da Educação. Uso o cargo como degrau: cada projeto que faço é um passo para me firmar como desenvolvedor Java.",
-    "O itau-resilience-bff é a prova disso. Não é um tutorial copiado: é um sistema que eu quebrei, entendi por baixo do framework e consertei — inclusive um bug de ordem de aspectos que a maioria nunca chega a enxergar.",
+    "Minha trajetória não começou na tecnologia. Comecei como **vendedor**, passei pelo **atendimento em restaurante** e depois pelo **telemarketing** — atendendo pela **Bradesco Seguros**. Em seguida migrei para a área administrativa, como **auxiliar administrativo**.",
+    "Hoje curso **Ciência da Computação** (**5º semestre**) no **Centro Universitário do Distrito Federal**, em Brasília, e atuo como **analista de dados** no **Ministério da Educação**. Uso esse cargo como ponte enquanto migro de vez para o desenvolvimento **Java**.",
+    "O **itau-resilience-bff** é o meu **primeiro projeto de verdade** — não um tutorial: um sistema que eu quebrei, entendi por baixo do framework e consertei. E é só o primeiro: pretendo construir um portfólio de projetos que provem, na prática, que sou desenvolvedor.",
   ],
-  // Marcadores da trajetória (renderizados com stagger).
+  // Trajetória condensada (renderizada com stagger).
   marcos: [
-    { de: "Administrativo & atendimento", para: "A base: organização e lidar com gente." },
+    { de: "Vendas, restaurante e telemarketing", para: "Atendimento de verdade — inclusive pela Bradesco Seguros." },
+    { de: "Auxiliar administrativo", para: "Organização, processo e rotina." },
     { de: "Ciência da Computação — UDF", para: "5º semestre, em Brasília." },
-    { de: "Analista de dados — MEC", para: "O degrau atual, enquanto miro Java." },
-    { de: "Desenvolvedor Java", para: "O destino, construído com projeto real." },
+    { de: "Analista de dados — MEC", para: "A ponte atual, enquanto migro para Java." },
+    { de: "Desenvolvedor Java", para: "O destino — começando pelo itau-resilience-bff." },
   ],
 };
 
@@ -138,43 +141,12 @@ export const skills = {
   ],
 };
 
-export const material = {
-  overline: "Material de estudo",
-  titulo: "O que eu documentei estudando este projeto.",
-  intro:
-    "Guias que escrevi para dominar o projeto de ponta a ponta — de arquitetura a comandos de terminal.",
-  // Os arquivos ainda não existem em public/docs/ — a seção já funciona assim.
-  // Basta soltar os PDFs com EXATAMENTE estes nomes e tudo passa a baixar.
-  pdfs: [
-    {
-      titulo: "Entenda e Apresente seu Projeto",
-      desc: "Arquitetura, glossário com analogias e a história do Retry morto — explicados do zero.",
-      arquivo: "/docs/1-Entenda-e-Apresente-seu-Projeto.pdf",
-    },
-    {
-      titulo: "Perguntas de Entrevista",
-      desc: "Perguntas e respostas técnicas e comportamentais sobre o projeto.",
-      arquivo: "/docs/2-Perguntas-de-Entrevista.pdf",
-    },
-    {
-      titulo: "Guia de Comandos do Projeto",
-      desc: "Docker, Gradle, npm, git e o roteiro de demonstração ao vivo.",
-      arquivo: "/docs/3-Guia-de-Comandos-do-Projeto.pdf",
-    },
-    {
-      titulo: "Guia de Comandos Linux",
-      desc: "Navegação, permissões, processos, SSH e atalhos de terminal.",
-      arquivo: "/docs/4-Guia-de-Comandos-Linux.pdf",
-    },
-  ],
-};
-
 export const contato = {
   overline: "Contato",
   titulo: "Vamos construir algo que não cai?",
   subtitulo:
     "Aberto a oportunidades como desenvolvedor Java — de preferência no setor bancário.",
-  email: "brunoxmns7@gmail.com",
+  email: "brunoximenes71@gmail.com",
   links: [
     { label: "GitHub", handle: "ximenesdev", href: "https://github.com/ximenesdev" },
     {
@@ -182,16 +154,20 @@ export const contato = {
       handle: "bruno-ximenes",
       href: "https://www.linkedin.com/in/bruno-ximenes-97a52338a",
     },
-    { label: "E-mail", handle: "brunoxmns7@gmail.com", href: "mailto:brunoxmns7@gmail.com" },
+    {
+      label: "E-mail",
+      handle: "brunoximenes71@gmail.com",
+      href: "mailto:brunoximenes71@gmail.com",
+    },
   ],
 };
 
 /*
- * TEMAS DE COR POR SEÇÃO — a "jornada de matiz".
- * accent/accentGlow/accentRgb: reescrevem as CSS vars quando a seção fica ativa
- *   (bordas, brilhos, texto em gradiente reagem juntos).
+ * TEMAS DE COR POR SEÇÃO — a "jornada de matiz" (5 seções).
+ * accent/accentGlow/accentRgb: reescrevem as CSS vars quando a seção fica ativa.
  * mesh: as 3 cores que o shader mistura sobre o quase-preto (c1 domina).
- * A ordem quente->fria conta a história: âmbar (humano) -> azul (técnico) -> violeta (convite).
+ * Ordem quente->fria: âmbar (humano) -> azul (técnico) -> violeta (convite).
+ * A seção Stack faz a ponte azul->violeta antes do Contato.
  */
 export const sectionThemes = {
   hero: {
@@ -213,16 +189,10 @@ export const sectionThemes = {
     mesh: ["#4b82e0", "#74a2f7", "#2a2a55"],
   },
   skills: {
-    accent: "#4b82e0",
-    accentGlow: "#74a2f7",
-    accentRgb: "75, 130, 224",
+    accent: "#6f6be0",
+    accentGlow: "#9a8cf0",
+    accentRgb: "111, 107, 224",
     mesh: ["#4b82e0", "#6f6be0", "#8a6bd8"],
-  },
-  material: {
-    accent: "#8a6bd8",
-    accentGlow: "#ac8df2",
-    accentRgb: "138, 107, 216",
-    mesh: ["#7a6bd8", "#6f6be0", "#4b82e0"],
   },
   contato: {
     accent: "#8a6bd8",
