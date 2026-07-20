@@ -12,18 +12,36 @@
   max-width: 40rem;
 }
 
-.eyebrow {
-  display: flex;
-  flex-wrap: wrap;
+/* selo de disponibilidade — pill discreto com ponto pulsante */
+.badge {
+  display: inline-flex;
   align-items: center;
-  gap: 0.6rem 1rem;
+  gap: 0.6rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 100px;
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  background: rgba(var(--accent-rgb), 0.08);
+  font-size: var(--fs-overline);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-mid);
   margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
 }
-.eyebrow .dot {
-  width: 5px;
-  height: 5px;
+.badgeDot {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.5);
+  animation: badgepulse 2.4s var(--ease-in-out) infinite;
+}
+@keyframes badgepulse {
+  0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.5); }
+  70% { box-shadow: 0 0 0 7px rgba(var(--accent-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .badgeDot { animation: none; }
 }
 
 .name {
@@ -48,7 +66,7 @@
   font-size: var(--fs-body);
   font-weight: 300;
   color: var(--text-mid);
-  max-width: 46ch;
+  max-width: 48ch;
   margin-bottom: clamp(2rem, 5vh, 3rem);
 }
 

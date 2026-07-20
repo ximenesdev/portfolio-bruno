@@ -1,8 +1,9 @@
 /*
  * HERO — 100% tipográfico (sem foto). Dominante âmbar.
- * A intro toca quando o preloader levanta (prop `play`): o nome sobe sob máscara,
- * o headline entra por linhas (SplitText) e o resto faz fade-up. Só o texto se
- * move — a tipografia grande faz o trabalho, com muito espaço escuro em volta.
+ * Clareza logo de cara (quem sou / o que faço): um selo de disponibilidade, o
+ * nome grande, a headline de valor e uma frase direta nomeando papel e stack.
+ * A intro toca quando o preloader levanta (prop `play`): o nome e a headline
+ * sobem sob máscara (SplitText) e o resto faz fade-up. Só o texto se move.
  */
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap, SplitText, prefersReducedMotion } from "../../lib/gsap";
@@ -19,10 +20,10 @@ export default function Hero({ play, onNavigate }) {
     if (prefersReducedMotion()) return;
     const q = gsap.utils.selector(root);
     gsap.set([q(`.${styles.name}`), q(`.${styles.headline}`)], { autoAlpha: 0 });
-    gsap.set([q(`.${styles.eyebrow}`), q(`.${styles.lead}`), q(`.${styles.ctas}`), q(`.${styles.scroll}`)], {
-      autoAlpha: 0,
-      y: 22,
-    });
+    gsap.set(
+      [q(`.${styles.badge}`), q(`.${styles.lead}`), q(`.${styles.ctas}`), q(`.${styles.scroll}`)],
+      { autoAlpha: 0, y: 22 }
+    );
   }, []);
 
   // Toca a intro assim que o preloader termina.
@@ -37,8 +38,8 @@ export default function Hero({ play, onNavigate }) {
       gsap.set([q(`.${styles.name}`), q(`.${styles.headline}`)], { autoAlpha: 1 });
 
       const tl = gsap.timeline();
-      tl.from(q(`.${styles.eyebrow}`), { autoAlpha: 0, y: 22, duration: 0.7 })
-        .from(nameSplit.lines, { yPercent: 115, duration: 1, stagger: 0.1, ease: "power4.out" }, "-=0.4")
+      tl.to(q(`.${styles.badge}`), { autoAlpha: 1, y: 0, duration: 0.7 })
+        .from(nameSplit.lines, { yPercent: 115, duration: 1, stagger: 0.1, ease: "power4.out" }, "-=0.35")
         .from(headSplit.lines, { yPercent: 115, duration: 0.9, stagger: 0.09, ease: "power4.out" }, "-=0.7")
         .to(q(`.${styles.lead}`), { autoAlpha: 1, y: 0, duration: 0.8 }, "-=0.5")
         .to(q(`.${styles.ctas}`), { autoAlpha: 1, y: 0, duration: 0.8 }, "-=0.6")
@@ -52,32 +53,36 @@ export default function Hero({ play, onNavigate }) {
   return (
     <section id="hero" className={styles.hero} ref={root}>
       <div className="container">
-      <div className={styles.inner}>
-        <p className={`overline ${styles.eyebrow}`}>
-          <span>{meta.eyebrow}</span>
-          <span className={styles.dot} />
-          <span>{meta.local}</span>
-        </p>
+        <div className={styles.inner}>
+          {/* selo de disponibilidade — "o que eu busco" antes de tudo */}
+          <p className={styles.badge}>
+            <span className={styles.badgeDot} aria-hidden="true" />
+            {meta.badge}
+          </p>
 
-        <h1 className={styles.name}>{meta.nome}</h1>
+          <h1 className={styles.name}>{meta.nome}</h1>
 
-        <p className={styles.headline}>{meta.headline}</p>
+          <p className={styles.headline}>{meta.headline}</p>
 
-        <p className={styles.lead}>{hero.lead}</p>
+          <p className={styles.lead}>{hero.lead}</p>
 
-        <div className={styles.ctas}>
-          <MagneticButton href="#projeto" onClick={(e) => { e.preventDefault(); onNavigate("projeto"); }} arrow>
-            Ver o projeto
-          </MagneticButton>
-          <MagneticButton
-            href="#contato"
-            variant="ghost"
-            onClick={(e) => { e.preventDefault(); onNavigate("contato"); }}
-          >
-            Entrar em contato
-          </MagneticButton>
+          <div className={styles.ctas}>
+            <MagneticButton
+              href="#projeto"
+              onClick={(e) => { e.preventDefault(); onNavigate("projeto"); }}
+              arrow
+            >
+              Ver o projeto
+            </MagneticButton>
+            <MagneticButton
+              href="#contato"
+              variant="ghost"
+              onClick={(e) => { e.preventDefault(); onNavigate("contato"); }}
+            >
+              Entrar em contato
+            </MagneticButton>
+          </div>
         </div>
-      </div>
       </div>
 
       <div className={styles.scroll} aria-hidden="true">
