@@ -1,0 +1,29 @@
+.heading {
+  margin-bottom: clamp(2.5rem, 6vh, 5rem);
+}
+
+.overline {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Um traço curto na cor do acento, antes do overline — assinatura discreta da seção */
+.overline::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: var(--lh-snug);
+  /* medida relativa à fonte GRANDE do próprio título (ch usa o font-size local) */
+  max-width: 18ch;
+  /* defensivo: só quebra palavra se ela sozinha estourar (evita cortar na máscara) */
+  overflow-wrap: break-word;
+}

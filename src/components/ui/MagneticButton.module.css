@@ -1,0 +1,49 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.7rem;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  will-change: transform;
+  transition: background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+/* Variante preenchida: acento suave, não bloco saturado gritante */
+.solid {
+  background: rgba(var(--accent-rgb), 0.16);
+  color: var(--text-hi);
+  border: 1px solid rgba(var(--accent-rgb), 0.5);
+}
+.solid:hover {
+  background: rgba(var(--accent-rgb), 0.28);
+  border-color: var(--accent-glow);
+}
+
+/* Variante contorno: hairline que acende no hover */
+.ghost {
+  background: transparent;
+  color: var(--text-hi);
+  border: 1px solid var(--ink-600);
+}
+.ghost:hover {
+  border-color: rgba(var(--accent-rgb), 0.6);
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.arrow {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
