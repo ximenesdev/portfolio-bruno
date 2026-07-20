@@ -80,7 +80,7 @@
   color: var(--text-mid);
 }
 .row:hover .arrow {
-  transform: translate(6px, -6px) rotate(0deg);
+  transform: translate(3px, -3px);
   color: var(--accent);
 }
 

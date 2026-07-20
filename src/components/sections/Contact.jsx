@@ -9,7 +9,9 @@ import { useMagnetic } from "../../hooks/useMagnetic";
 import styles from "./Contact.module.css";
 
 function ContactRow({ label, handle, href }) {
-  const ref = useMagnetic({ strength: 0.2, radius: 60 });
+  // magnético comportado: rótulos grandes exigem amplitude/alcance menores para
+  // não parecerem "soltos" (calibrado pelo nível dos botões do Hero).
+  const ref = useMagnetic({ strength: 0.1, radius: 36 });
   const external = href.startsWith("http");
   return (
     <a
