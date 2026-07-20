@@ -1,0 +1,33 @@
+/* O mesh vive atrás de tudo. blur suave garante a maciez de "aurora" e some com
+   qualquer aliasing do render em baixa resolução. */
+.wrap {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: blur(22px) saturate(1.05);
+  transform: scale(1.1); /* esconde a borda que o blur revela */
+  will-change: transform;
+}
+
+/* Fallback estático (mobile / reduced-motion): sem canvas, sem loop — só
+   radial-gradients compostas pela GPU, uma vez. Elegante e leve. */
+.fallback {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  background:
+    radial-gradient(60% 55% at 20% 15%, rgba(var(--accent-rgb), 0.28), transparent 70%),
+    radial-gradient(50% 50% at 85% 30%, rgba(255, 154, 90, 0.1), transparent 70%),
+    radial-gradient(60% 60% at 60% 95%, rgba(138, 107, 216, 0.16), transparent 75%),
+    var(--ink-900);
+  transition: background 1.2s var(--ease-out);
+}
