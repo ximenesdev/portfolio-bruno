@@ -8,6 +8,17 @@ import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
 import styles from "./About.module.css";
 
+// Converte **palavra** em <strong> — dá ritmo de leitura (cargos, tempo, nomes).
+function renderBold(texto) {
+  return texto.split(/(\*\*[^*]+\*\*)/g).map((parte, i) =>
+    parte.startsWith("**") && parte.endsWith("**") ? (
+      <strong key={i}>{parte.slice(2, -2)}</strong>
+    ) : (
+      parte
+    )
+  );
+}
+
 export default function About() {
   return (
     <section id="sobre" className="section">
@@ -17,7 +28,7 @@ export default function About() {
         <div className={styles.grid}>
           <Reveal className={styles.prose} stagger={0.15}>
             {about.paragrafos.map((p, i) => (
-              <p key={i}>{p}</p>
+              <p key={i}>{renderBold(p)}</p>
             ))}
           </Reveal>
 

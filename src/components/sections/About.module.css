@@ -20,6 +20,11 @@
   color: var(--text-hi);
   font-weight: 400;
 }
+/* palavras-chave em negrito: mais claras e um pouco mais pesadas — dão ritmo */
+.prose strong {
+  color: var(--text-hi);
+  font-weight: 500;
+}
 
 /* trajetória: lista vertical com um fio na cor do acento */
 .marcos {
