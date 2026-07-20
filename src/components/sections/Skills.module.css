@@ -1,0 +1,65 @@
+.group {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  padding-block: clamp(2rem, 5vh, 3.5rem);
+}
+.group + .group {
+  border-top: 1px solid var(--ink-600);
+}
+
+.groupLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  padding-top: 0.6rem;
+}
+.groupLabel .mark {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+/* grupo "em evolução": marcador contornado (não preenchido) — diferencia sem diminuir */
+.evoluindo .mark {
+  background: transparent;
+  border: 1.5px solid var(--accent);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.6rem, 1.5vw, 1rem);
+}
+.pill {
+  position: relative;
+  font-size: clamp(1.05rem, 2vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--text-hi);
+  padding: 0.7rem 1.35rem;
+  border: 1px solid var(--ink-600);
+  border-radius: 100px;
+  cursor: default;
+  transition: transform var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.pill:hover {
+  transform: translateY(-3px);
+  border-color: rgba(var(--accent-rgb), 0.55);
+  background: rgba(var(--accent-rgb), 0.08);
+}
+/* pills "em evolução": levemente recuadas visualmente, mas legíveis */
+.evoluindo .pill {
+  color: var(--text-mid);
+}
+
+@media (max-width: 720px) {
+  .group {
+    grid-template-columns: 1fr;
+  }
+}

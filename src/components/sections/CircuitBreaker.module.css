@@ -1,0 +1,127 @@
+.cb {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--ink-600);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent);
+}
+
+.stage {
+  width: 100%;
+}
+.svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* nós: cada um usa currentColor = a cor do seu estado */
+.node circle {
+  fill: rgba(8, 8, 12, 0.6);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  transition: opacity 0.5s var(--ease-out);
+  opacity: 0.32;
+}
+.node text {
+  fill: var(--text-mid);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: fill 0.5s var(--ease-out);
+}
+/* nó ativo: acende, cresce um tico e ganha glow */
+.node.active circle {
+  opacity: 1;
+  filter: drop-shadow(0 0 10px currentColor);
+}
+.node.active text {
+  fill: var(--text-hi);
+}
+.nodeScale {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.5s var(--ease-out);
+}
+.node.active .nodeScale {
+  transform: scale(1.06);
+}
+
+/* conectores base (apagados) */
+.link {
+  fill: none;
+  stroke: var(--ink-600);
+  stroke-width: 1.5;
+}
+/* conector ativo: um "pulso" que flui (dash em movimento) na cor de destino */
+.linkActive {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-dasharray: 14 120;
+  opacity: 0;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+.linkActive.on {
+  opacity: 1;
+  animation: flow 1.6s linear infinite;
+}
+@keyframes flow {
+  from { stroke-dashoffset: 134; }
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .linkActive.on { animation: none; }
+}
+
+/* painel de descrição do estado atual */
+.panel {
+  min-height: 8rem;
+}
+.panelName {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.panelDesc {
+  color: var(--text-mid);
+  max-width: 34ch;
+  line-height: 1.55;
+}
+.fadeItem {
+  animation: fadeUp 0.5s var(--ease-out);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* legenda usada só no modo reduced-motion (versão estática, sem ciclo) */
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.legendItem {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  transform: translateY(1px);
+}
+
+@media (max-width: 820px) {
+  .cb {
+    grid-template-columns: 1fr;
+  }
+}

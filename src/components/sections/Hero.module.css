@@ -1,0 +1,92 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(6rem, 12vh, 9rem) clamp(4rem, 8vh, 6rem);
+}
+
+/* o conteúdo alinha com as demais seções (mesmo container) */
+.inner {
+  max-width: 40rem;
+}
+
+.eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+}
+.eyebrow .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.name {
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.035em;
+  color: var(--text-hi);
+  margin-bottom: clamp(1.25rem, 3vh, 2rem);
+}
+
+.headline {
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-hi);
+  max-width: 22ch;
+  margin-bottom: 1.25rem;
+}
+
+.lead {
+  font-size: var(--fs-body);
+  font-weight: 300;
+  color: var(--text-mid);
+  max-width: 46ch;
+  margin-bottom: clamp(2rem, 5vh, 3rem);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* indicador de scroll — discreto, no rodapé do hero */
+.scroll {
+  position: absolute;
+  bottom: clamp(1.5rem, 4vh, 2.5rem);
+  left: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--fs-overline);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-low);
+}
+.scrollLine {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  transform-origin: left;
+  animation: scrollpulse 2.4s var(--ease-in-out) infinite;
+}
+@keyframes scrollpulse {
+  0%, 100% { transform: scaleX(0.4); opacity: 0.5; }
+  50% { transform: scaleX(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scrollLine { animation: none; }
+}
+
+/* o container de máscara dos textos animados */
+.mask {
+  overflow: hidden;
+}
