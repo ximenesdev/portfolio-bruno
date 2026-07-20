@@ -20,9 +20,22 @@ export default function MagneticButton({
     <span className={styles.label}>
       {children}
       {arrow && (
-        <span className={styles.arrow} aria-hidden="true">
-          →
-        </span>
+        <svg
+          className={styles.arrow}
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M5 12h14m0 0-5-5m5 5-5 5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       )}
     </span>
   );

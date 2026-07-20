@@ -21,9 +21,20 @@ function ContactRow({ label, handle, href }) {
         <span className={styles.rowLabel}>{label}</span>
         <span className={styles.rowHandle}>{handle}</span>
       </span>
-      <span className={styles.arrow} aria-hidden="true">
-        ↗
-      </span>
+      <svg
+        className={styles.arrow}
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M7 17 17 7m0 0H9m8 0v8"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </a>
   );
 }
