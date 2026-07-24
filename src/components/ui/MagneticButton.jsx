@@ -13,7 +13,9 @@ export default function MagneticButton({
   className = "",
   ...rest
 }) {
-  const ref = useMagnetic();
+  // Magnético contido: deslocamento sutil (mesmo nível dos links de Contato),
+  // para o botão "responder" ao cursor sem sair flutuando.
+  const ref = useMagnetic({ strength: 0.12, radius: 44 });
   const cls = `${styles.btn} ${styles[variant]} ${className}`;
 
   const inner = (

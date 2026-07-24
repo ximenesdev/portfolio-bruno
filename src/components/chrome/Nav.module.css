@@ -44,6 +44,24 @@
 .link.active {
   color: var(--text-hi);
 }
+/* microinteração: um traço no acento que se desenha da esquerda no hover — a
+   mesma linguagem dos destinos de Contato. Discreto: só transform, sem crescer. */
+.link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.8;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.link:hover::before {
+  transform: scaleX(1);
+}
 /* ponto indicador da seção ativa */
 .link.active::after {
   content: "";

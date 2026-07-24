@@ -9,7 +9,10 @@ import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "../lib/gsap";
 import { usePointerFine } from "./useMediaQuery";
 
-export function useMagnetic({ strength = 0.35, radius = 90 } = {}) {
+// Padrão de intensidade do site: magnético SUTIL. strength ~0.1–0.12 e raio de
+// captura pequeno (~40–50px) mantêm o deslocamento na casa de poucos px. Quem
+// precisar de menos (rótulos grandes de Contato) reduz ainda mais.
+export function useMagnetic({ strength = 0.12, radius = 44 } = {}) {
   const ref = useRef(null);
   const pointerFine = usePointerFine();
 
