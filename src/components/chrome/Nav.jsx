@@ -20,7 +20,7 @@ export default function Nav({ activeId, onNavigate }) {
     <>
       <nav className={styles.nav} aria-label="Navegação principal">
         <a className={styles.logo} href="#hero" onClick={(e) => go(e, "hero")}>
-          Bruno<b>.</b>
+          Ximenes<b>.</b>
         </a>
 
         <div className={styles.links}>

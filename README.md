@@ -1,8 +1,8 @@
 # Portfólio — Bruno Ximenes
 
-Site pessoal / portfólio de **Bruno Ximenes**, desenvolvedor Java com foco em
-back-end resiliente. Single page, animado e clean, construído para ser linkado no
-LinkedIn e no GitHub.
+Site pessoal / portfólio de **Bruno Ximenes**, desenvolvedor em formação, com base
+em back-end (Java e Spring Boot) e caminho para full stack. Single page, animado e
+clean, construído para ser linkado no LinkedIn e no GitHub.
 
 **Stack:** React 19 + Vite · GSAP (ScrollTrigger + SplitText) · Lenis (smooth scroll)
 · mesh gradient em WebGL · CSS puro com design tokens · Poppins (self-hospedada).

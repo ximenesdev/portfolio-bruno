@@ -8,5 +8,5 @@
   <rect width="64" height="64" rx="16" fill="#08080c" />
   <text x="50%" y="53%" dominant-baseline="central" text-anchor="middle"
         font-family="Poppins, system-ui, sans-serif" font-size="38" font-weight="600"
-        fill="url(#g)">B</text>
+        fill="url(#g)">X</text>
 </svg>
