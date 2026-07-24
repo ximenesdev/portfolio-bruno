@@ -65,23 +65,22 @@ export default function Project() {
           ))}
         </Reveal>
 
-        <div className={styles.caseHead}>
-          <Reveal>
-            <p className="overline" style={{ marginBottom: "1rem" }}>
-              Case técnico
-            </p>
+        {/* Desafio técnico: bloco COMPACTO (sintoma → causa → correção), não um
+            showcase de 3 colunas. Prova envolvimento real sem virar o clímax. */}
+        <Reveal className={styles.caseCard}>
+          <div className={styles.caseHeader}>
+            <p className="overline">Desafio técnico</p>
             <h3 className={styles.caseTitle}>{project.caseRetry.titulo}</h3>
-          </Reveal>
-        </div>
-
-        <Reveal className={styles.steps} stagger={0.15}>
-          {project.caseRetry.passos.map((p) => (
-            <div className={styles.step} key={p.n}>
-              <p className={styles.stepNum}>{p.n}</p>
-              <h4 className={styles.stepTitle}>{p.titulo}</h4>
-              <p className={styles.stepText}>{p.texto}</p>
-            </div>
-          ))}
+            <p className={styles.caseIntro}>{project.caseRetry.intro}</p>
+          </div>
+          <dl className={styles.caseSteps}>
+            {project.caseRetry.passos.map((p) => (
+              <div className={styles.caseRow} key={p.n}>
+                <dt className={styles.caseLabel}>{p.titulo}</dt>
+                <dd className={styles.caseText}>{p.texto}</dd>
+              </div>
+            ))}
+          </dl>
         </Reveal>
 
         <Reveal>
