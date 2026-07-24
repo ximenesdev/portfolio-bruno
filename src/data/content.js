@@ -10,10 +10,12 @@
 
 export const meta = {
   nome: "Bruno Ximenes",
-  // Selo de disponibilidade — diz "o que eu busco" logo de cara.
-  badge: "Disponível para oportunidades como desenvolvedor Java",
-  // Headline (fio condutor): vale no técnico (resiliência) e na virada de carreira.
-  headline: "Construo back-ends que continuam de pé quando uma peça falha.",
+  // Selo de disponibilidade — diz "o que eu busco" logo de cara, sem cravar
+  // linguagem nem senioridade que eu ainda não tenho.
+  badge: "Aberto a oportunidades como desenvolvedor",
+  // Headline: apresenta a PESSOA e a direção profissional (back-end → full stack).
+  // Atemporal — continua valendo quando o próximo projeto for de outra natureza.
+  headline: "Desenvolvedor em formação, construindo minha base no back-end.",
 };
 
 export const nav = [
@@ -25,59 +27,62 @@ export const nav = [
 ];
 
 export const hero = {
-  // Uma frase direta: quem eu sou + o que eu faço + stack (sem exigir scroll).
+  // Camada de apoio ao headline: quem eu sou + onde estou + stack + direção,
+  // tudo num relance (sem exigir scroll).
   lead:
-    "Estudante de Ciência da Computação (Brasília) em transição de carreira — construo back-ends em Java e Spring Boot, com foco em resiliência.",
+    "Estudante de Ciência da Computação em Brasília, em transição de carreira. Hoje programo em Java e Spring Boot, caminhando para o full stack.",
 };
 
 export const about = {
   overline: "Sobre mim",
-  titulo: "Do atendimento ao código que resiste a falha.",
+  titulo: "Do atendimento ao código.",
   // Trajetória real, tom profissional. **negrito** destaca cargos/tempo/instituições.
   paragrafos: [
-    "Minha trajetória não começou na tecnologia. Comecei como **vendedor**, passei pelo **atendimento em restaurante** e depois pelo **telemarketing** — atendendo pela **Bradesco Seguros**. Em seguida migrei para a área administrativa, como **auxiliar administrativo**.",
-    "Hoje curso **Ciência da Computação** (**5º semestre**) no **Centro Universitário do Distrito Federal**, em Brasília, e atuo como **analista de dados** no **Ministério da Educação**. Uso esse cargo como ponte enquanto migro de vez para o desenvolvimento **Java**.",
-    "O **itau-resilience-bff** é o meu **primeiro projeto de verdade** — não um tutorial: um sistema que eu quebrei, entendi por baixo do framework e consertei. E é só o primeiro: pretendo construir um portfólio de projetos que provem, na prática, que sou desenvolvedor.",
+    "Minha trajetória não começou na tecnologia. Fui **vendedor**, trabalhei como **garçom** em restaurante e passei pelo **telemarketing**, atendendo pela **Bradesco Seguros**. Depois vim para a área administrativa, como **auxiliar administrativo**.",
+    "Hoje curso **Ciência da Computação** (**5º semestre**) no **Centro Universitário do Distrito Federal (UDF)**, em Brasília, e sou **estagiário** na área de **Gestão de TIC** (Tecnologia da Informação e Comunicação) do **Ministério da Educação**. É onde coloco em prática, todo dia, o que estudo.",
+    "Meu objetivo é ser **desenvolvedor full stack**. A base que construo agora é em **back-end**, com **Java** e **Spring Boot**, e sigo aprendendo e expandindo. O **itau-resilience-bff** foi meu **primeiro projeto de verdade** — não um tutorial: um sistema que quebrei, entendi por baixo do framework e consertei. E é só o primeiro de vários.",
   ],
   // Trajetória condensada (renderizada com stagger).
   marcos: [
     { de: "Vendas, restaurante e telemarketing", para: "Atendimento de verdade — inclusive pela Bradesco Seguros." },
     { de: "Auxiliar administrativo", para: "Organização, processo e rotina." },
     { de: "Ciência da Computação — UDF", para: "5º semestre, em Brasília." },
-    { de: "Analista de dados — MEC", para: "A ponte atual, enquanto migro para Java." },
-    { de: "Desenvolvedor Java", para: "O destino — começando pelo itau-resilience-bff." },
+    { de: "Estágio em TIC — MEC", para: "Tecnologia na prática, todos os dias." },
+    { de: "Desenvolvedor full stack", para: "O objetivo — a base começa no back-end." },
   ],
 };
 
 export const project = {
   overline: "Projeto em destaque",
   nome: "itau-resilience-bff",
-  tagline: "Um super app bancário que degrada com elegância em vez de cair.",
+  tagline: "Resiliência em um sistema bancário distribuído.",
   descricao:
-    "Um app bancário simplificado (saldo, cartão, investimentos) que demonstra resiliência em microsserviços com o padrão BFF (Backend For Frontend) + Resilience4j. Quando um serviço de backend falha ou fica lento, o sistema continua respondendo em parte — degradação graciosa, não uma queda total.",
+    "Uma simulação de sistema bancário distribuído: serviços de back-end independentes (saldo, cartão e investimentos) atrás de um BFF (Backend For Frontend) com Resilience4j, e um painel de operações que mostra o comportamento sob falha. Quando um serviço fica lento ou cai, o sistema continua respondendo em parte — degradação graciosa em vez de queda total.",
   stack: ["Java 25", "Spring Boot 4", "Resilience4j", "React 19", "Docker", "GitHub Actions"],
   repo: "https://github.com/ximenesdev/itau-resilience-bff",
-  // O melhor case técnico, contado em 3 passos que se revelam no scroll.
+  // Um desafio técnico concreto, compacto: sintoma → causa → correção.
+  // Tom "assim que eu depuro", não "meu grande feito".
   caseRetry: {
-    titulo: "A história do “Retry morto”",
+    titulo: "O “Retry morto”",
+    intro: "Um bug que rendeu — e como cheguei na causa.",
     passos: [
       {
         n: "01",
-        titulo: "O sintoma",
+        titulo: "Sintoma",
         texto:
-          "Eu tinha um @Retry configurado que simplesmente não tentava de novo. No papel estava tudo certo; na prática, nada de retry.",
+          "Um @Retry configurado que simplesmente não tentava de novo. No papel, tudo certo; na prática, nada de retry.",
       },
       {
         n: "02",
-        titulo: "A causa",
+        titulo: "Causa",
         texto:
-          "A ordem dos aspectos (AOP) do Resilience4j. O Circuit Breaker, por estar “por dentro”, engolia a falha e devolvia o fallback como se fosse sucesso — antes de o Retry, “por fora”, enxergar o erro real.",
+          "A ordem dos aspectos (AOP) do Resilience4j: o Circuit Breaker, por dentro, engolia a falha e devolvia o fallback como sucesso antes de o Retry, por fora, ver o erro.",
       },
       {
         n: "03",
-        titulo: "A correção",
+        titulo: "Correção",
         texto:
-          "Inverti a ordem dos aspectos via aspectOrder na configuração. O Retry passou a ver a falha primeiro. Mais do que plugar biblioteca, foi entender o que acontece por baixo do framework.",
+          "Inverti a ordem via aspectOrder na configuração — o Retry passou a ver a falha primeiro. Menos plugar biblioteca, mais entender o que roda por baixo do framework.",
       },
     ],
   },
@@ -91,7 +96,7 @@ export const project = {
     {
       src: "/img/dashboard-graceful.png",
       alt: "Dashboard demonstrando degradação graciosa",
-      legenda: "Degradação graciosa — o app responde em parte, não cai.",
+      legenda: "Degradação graciosa — o sistema responde em parte.",
     },
   ],
 };
@@ -122,19 +127,20 @@ export const circuitStates = [
   },
 ];
 
-// Bruno: ajuste os níveis à vontade. "solido" = mais confortável;
-// "evoluindo" = aprofundando agora. Rótulos confiantes de propósito (público = recrutador).
+// Bruno: ajuste os níveis à vontade. "solido" = onde tenho mais base;
+// "evoluindo" = aprendendo agora. Rótulos honestos e profissionais (público = recrutador):
+// nem coloquiais, nem inflados.
 export const skills = {
   overline: "Stack",
-  titulo: "As ferramentas com que eu construo.",
+  titulo: "Ferramentas e tecnologias.",
   grupos: [
     {
-      rotulo: "Base sólida",
+      rotulo: "Base técnica",
       nivel: "solido",
       itens: ["Java", "Spring Boot", "Resilience4j", "Git"],
     },
     {
-      rotulo: "Em evolução ativa",
+      rotulo: "Em aprendizado",
       nivel: "evoluindo",
       itens: ["React", "Docker", "Gradle"],
     },
@@ -143,9 +149,9 @@ export const skills = {
 
 export const contato = {
   overline: "Contato",
-  titulo: "Vamos construir algo que não cai?",
+  titulo: "Vamos conversar?",
   subtitulo:
-    "Aberto a oportunidades como desenvolvedor Java — de preferência no setor bancário.",
+    "Estou aberto a oportunidades como desenvolvedor — estágio, primeiro emprego ou parcerias em projetos. Se algo aqui fez sentido, me chama.",
   email: "brunoximenes71@gmail.com",
   links: [
     { label: "GitHub", handle: "ximenesdev", href: "https://github.com/ximenesdev" },
