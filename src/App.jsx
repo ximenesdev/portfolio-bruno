@@ -32,6 +32,16 @@ const INTENSITY = {
   contato: 1.1,
 };
 
+// Recuo de âncora ao pular para uma seção: a altura REAL da barra fixa (que muda
+// entre desktop e mobile por causa do padding fluido) + um respiro acima do título.
+// Medimos o elemento em vez de chumbar um número — assim nada chega cortado.
+function getAnchorOffset() {
+  const navEl = document.querySelector("nav");
+  const navH = navEl ? navEl.getBoundingClientRect().height : 64;
+  const gap = Math.min(24, window.innerHeight * 0.03); // respiro (menor no mobile)
+  return Math.round(navH + gap);
+}
+
 export default function App() {
   const reduced = useReducedMotion();
   const isWide = useIsWide();
@@ -60,6 +70,17 @@ export default function App() {
       // conteúdo/fontes já assentados: recalcula os gatilhos de scroll
       ScrollTrigger.refresh();
     }
+  }, [loaded]);
+
+  // ---- Publica o recuo de âncora (px) para o scroll-margin-top das seções ----
+  // A barra muda de altura em desktop/mobile; medimos no mount, no resize e
+  // quando o preloader levanta (fontes já assentadas = altura final da barra).
+  useEffect(() => {
+    const apply = () =>
+      document.documentElement.style.setProperty("--anchor-offset", `${getAnchorOffset()}px`);
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
   }, [loaded]);
 
   // ---- Seção ativa: a banda de detecção é uma linha no centro da tela ----
@@ -92,9 +113,14 @@ export default function App() {
   const onNavigate = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
-    // O recuo do nav fixo vem do scroll-margin-top das seções (CSS), respeitado
-    // tanto pelo Lenis quanto pelo scrollIntoView nativo — sem offset em dobro.
+    // Mede a barra AGORA (estado atual, mobile/desktop) e usa o mesmo recuo nos
+    // dois caminhos — sem cálculo em dobro.
+    const offset = getAnchorOffset();
+    document.documentElement.style.setProperty("--anchor-offset", `${offset}px`);
     const lenis = lenisRef.current;
+    // Fonte ÚNICA de recuo: o scroll-margin-top das seções (= --anchor-offset).
+    // Esta versão do Lenis JÁ respeita scroll-margin-top, então NÃO passamos offset
+    // aqui — passar recriaria o recuo em dobro. O fallback nativo usa o mesmo CSS.
     if (lenis) lenis.scrollTo(el);
     else el.scrollIntoView({ behavior: "auto" });
   };

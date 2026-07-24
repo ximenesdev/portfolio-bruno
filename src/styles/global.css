@@ -97,9 +97,12 @@ img {
   padding-block: var(--space-section);
 }
 
-/* âncora "enquadrada": ao pular para uma seção, ela encosta abaixo do nav fixo */
+/* âncora "enquadrada": ao pular para uma seção, ela encosta abaixo do nav fixo.
+   Vale para o scroll nativo (scrollIntoView, usado no fallback/reduced-motion),
+   que respeita scroll-margin-top. O Lenis NÃO lê esta propriedade — no caminho
+   do Lenis o mesmo recuo vai explícito como offset (ver App.jsx). */
 section[id] {
-  scroll-margin-top: var(--nav-h);
+  scroll-margin-top: var(--anchor-offset);
 }
 
 .overline {
