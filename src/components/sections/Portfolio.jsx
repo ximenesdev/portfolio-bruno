@@ -12,7 +12,8 @@
  * Aba sem item não é renderizada. Enquanto `certificados` estiver vazio no
  * content.js, a aba "Certificados" não existe no site.
  */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ScrollTrigger } from "../../lib/gsap";
 import { portfolio, projetos, certificados } from "../../data/content";
 import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
@@ -102,29 +103,57 @@ export default function Portfolio({ onNavigate }) {
   const cardsRef = useRef({});
   const detalheRef = useRef(null);
   const voltandoPara = useRef(null);
+  const trocaInicial = useRef(true);
+  const reenquadrar = useRef(false);
 
   const projetoAberto = projetos.find((p) => p.id === abertoId) ?? null;
 
+  /* Trocar de vista muda a ALTURA do documento, e o ScrollTrigger não recalcula
+     sozinho: os eventos que ele observa (resize, load...) não incluem mudança de
+     DOM, e o refresh global só é agendado quando o gatilho novo usa `pin`. Sem
+     isto, os gatilhos das seções ABAIXO ficam com o start do layout antigo —
+     revelam fora da tela (e, como usam `once`, gastam a animação) ou não revelam.
+
+     useLayoutEffect de propósito: o DOM novo já está montado e o navegador ainda
+     não pintou, então nunca aparece um quadro com as posições erradas.
+
+     `onNavigate` fica FORA das deps de propósito: é recriada a cada render do App,
+     que re-renderiza a cada troca de seção ativa no scroll — incluí-la dispararia
+     refresh dezenas de vezes por rolagem. */
+  useLayoutEffect(() => {
+    if (trocaInicial.current) {
+      trocaInicial.current = false; // no mount não há o que recalcular nem reenquadrar
+      return;
+    }
+    ScrollTrigger.refresh();
+    if (reenquadrar.current) {
+      reenquadrar.current = false;
+      onNavigate?.("portfolio"); // depois do refresh: recalcula, só então rola
+    }
+  }, [abertoId, abaAtiva]);
+
   // Ao abrir o detalhe, o foco vai para o título dele; ao voltar, retorna para o
   // botão "Detalhes" do card de origem. Sem isso, quem usa teclado se perde.
+  // preventScroll: o reenquadramento é do Lenis — sem isto o foco rolaria junto,
+  // dois mecanismos disputando o mesmo quadro.
   useEffect(() => {
     if (projetoAberto) {
-      detalheRef.current?.focus();
+      detalheRef.current?.focus({ preventScroll: true });
     } else if (voltandoPara.current) {
-      cardsRef.current[voltandoPara.current]?.focus();
+      cardsRef.current[voltandoPara.current]?.focus({ preventScroll: true });
       voltandoPara.current = null;
     }
   }, [projetoAberto]);
 
   const abrir = (id) => {
+    reenquadrar.current = true; // o efeito acima reenquadra depois do refresh
     setAbertoId(id);
-    onNavigate?.("portfolio"); // reenquadra a seção usando o mesmo recuo do menu
   };
 
   const fechar = () => {
     voltandoPara.current = abertoId;
+    reenquadrar.current = true;
     setAbertoId(null);
-    onNavigate?.("portfolio");
   };
 
   // Navegação por setas entre as abas — comportamento esperado de um tablist.
@@ -168,7 +197,11 @@ export default function Portfolio({ onNavigate }) {
                     role="tab"
                     id={`tab-${aba.id}`}
                     aria-selected={ativa}
-                    aria-controls={`painel-${aba.id}`}
+                    /* Há UM painel só, e o id dele acompanha a aba ativa. Apontar
+                       o aria-controls da aba inativa para um id que não existe no
+                       DOM é IDREF quebrado — o leitor de tela anuncia um controle
+                       que não leva a lugar nenhum. Só a aba selecionada aponta. */
+                    aria-controls={ativa ? `painel-${aba.id}` : undefined}
                     tabIndex={ativa ? 0 : -1}
                     className={`${styles.tab} ${ativa ? styles.tabAtiva : ""}`}
                     onClick={() => trocarAba(aba.id)}
