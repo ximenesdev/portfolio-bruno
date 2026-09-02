@@ -29,7 +29,21 @@ function ProjectCard({ projeto, onAbrir, botaoRef }) {
     <article className={styles.card}>
       <div className={styles.cardTopo}>
         {projeto.capa ? (
-          <img className={styles.capa} src={projeto.capa} alt="" loading="lazy" decoding="async" />
+          /* width/height = proporção intrínseca (as capas são 1400x788 ≈ 16/9).
+             Aqui o espaço já é reservado pelo aspect-ratio do .cardTopo, então
+             estes atributos são a rede de segurança para o caso de :has() não
+             ser suportado — sem eles, ali a imagem entraria empurrando o card.
+             alt="" de propósito: nome, resumo e stack já estão em texto ao lado,
+             e descrever a capa seria redundância no leitor de tela. */
+          <img
+            className={styles.capa}
+            src={projeto.capa}
+            alt=""
+            width="1400"
+            height="788"
+            loading="lazy"
+            decoding="async"
+          />
         ) : (
           <p className={styles.cardMarca} aria-hidden="true">
             {projeto.tagline}

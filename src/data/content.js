@@ -160,7 +160,10 @@ export const portfolio = {
 /* PROJETOS
  * ---------------------------------------------------------------------------
  * Campos obrigatórios: id, nome, tagline, resumo, stack.
- * Opcionais: periodo, contexto, descricao, links, screenshots, casos, extra.
+ * Opcionais: periodo, contexto, capa, descricao, links, screenshots, casos, extra.
+ *   - `capa`    é a imagem do topo do card. ATENÇÃO: ela SUBSTITUI o topo
+ *               tipográfico, então a `tagline` deixa de aparecer no card e passa
+ *               a existir só no detalhe. Use 16/9 e prefira .webp.
  *   - `resumo`  aparece no CARD (2 linhas, curto).
  *   - `descricao` aparece no DETALHE (pode ser longo).
  *   - `casos`   são os blocos "sintoma → causa → correção" do detalhe.
@@ -174,6 +177,7 @@ export const projetos = [
     tagline: "Resiliência em um sistema bancário distribuído.",
     periodo: "2026",
     contexto: "Projeto pessoal de estudo",
+    capa: "/img/capa-itau-resilience-bff.webp",
     resumo:
       "Serviços de back-end independentes atrás de um BFF com Resilience4j, e um painel que mostra o sistema se degradando sem cair.",
     descricao:
@@ -228,6 +232,7 @@ export const projetos = [
     tagline: "Um cardápio que abre rápido dentro do Instagram.",
     periodo: "2026",
     contexto: "Cliente real — confeitaria em Brasília",
+    capa: "/img/capa-manducakes-cardapio.webp",
     resumo:
       "Cardápio digital mobile-first para o link da bio, publicado sob autorização da cliente. HTML, CSS e JavaScript puros.",
     descricao:
