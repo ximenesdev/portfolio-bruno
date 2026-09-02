@@ -48,13 +48,58 @@ export const about = {
     "Hoje curso **Ciência da Computação** (**6º semestre**) no **Centro Universitário do Distrito Federal (UDF)**, em Brasília, e sou **estagiário** na área de **Gestão de TIC** (Tecnologia da Informação e Comunicação) do **Ministério da Educação**. É onde coloco em prática, todo dia, o que estudo.",
     "Meu objetivo é ser **desenvolvedor full stack**. A base que construo agora é em **back-end**, com **Java** e **Spring Boot**, e sigo aprendendo e expandindo. Cada projeto aqui nasceu de um problema real — um sistema que quebrei, entendi por baixo do framework e consertei; um cardápio que precisava caber no celular de uma cliente.",
   ],
-  // Trajetória condensada (renderizada com stagger).
-  marcos: [
-    { de: "Vendas, restaurante e telemarketing", para: "Atendimento de verdade — inclusive pela Bradesco Seguros." },
-    { de: "Auxiliar administrativo", para: "Organização, processo e rotina." },
-    { de: "Ciência da Computação — UDF", para: "6º semestre, em Brasília." },
-    { de: "Estágio em TIC — MEC", para: "Tecnologia na prática, todos os dias." },
-    { de: "Desenvolvedor full stack", para: "O objetivo — a base começa no back-end." },
+  /* TRAJETÓRIA — a carreira como progressão por níveis.
+     `status` aceita "concluido" | "atual" | "proximo".
+     O medidor ("Nível 4 de 5" e o quanto a barra enche) sai da POSIÇÃO do item
+     com status "atual" dentro desta lista — nada é digitado à mão. Mova o
+     "atual" para outro item, ou acrescente um nível, e o medidor se reescreve.
+     Mantenha UM único item com status "atual". */
+  trajetoria: [
+    {
+      n: "01",
+      periodo: "2021 — 2024",
+      status: "concluido",
+      titulo: "Atendimento",
+      texto:
+        "Vendas, restaurante e telemarketing pela Bradesco Seguros. Aprendi a ouvir o problema inteiro antes de propor solução — e a lidar com gente irritada sem perder a linha.",
+      ganhos: ["Escuta ativa", "Alto volume", "Clareza sob pressão"],
+    },
+    {
+      n: "02",
+      periodo: "2025 — 2026",
+      status: "concluido",
+      titulo: "Administrativo",
+      texto:
+        "Auxiliar administrativo na Clínica Ouvir e na Veras Centro Automotivo. Primeiro contato com sistema interno, processo documentado e rotina que não pode falhar.",
+      ganhos: ["Processo", "Organização", "Sistemas internos"],
+    },
+    {
+      n: "03",
+      periodo: "2023 — cursando",
+      status: "concluido",
+      titulo: "Ciência da Computação — UDF",
+      texto:
+        "6º semestre, em Brasília. É onde a base formal entra: estrutura de dados, custo de algoritmo, banco de dados e engenharia de software.",
+      ganhos: ["Algoritmos", "Estrutura de dados", "Banco de dados"],
+    },
+    {
+      n: "04",
+      periodo: "2026 — atual",
+      status: "atual",
+      titulo: "Estágio em TIC — Ministério da Educação",
+      texto:
+        "Coordenação de Gestão de TIC. Apoio às demandas do SEI e ao núcleo administrativo de TI. Tecnologia dentro de um órgão público, com escala e regra de verdade.",
+      ganhos: ["SEI", "Suporte técnico", "Ambiente corporativo"],
+    },
+    {
+      n: "05",
+      periodo: "Próximo nível",
+      status: "proximo",
+      titulo: "Desenvolvedor full stack",
+      texto:
+        "A base começa no back-end, com Java e Spring Boot. Os projetos aqui embaixo são as provas que estou juntando pelo caminho.",
+      ganhos: [],
+    },
   ],
 
   /* Formação e experiência como LISTAS: entrada nova = uma linha a mais aqui.

@@ -10,6 +10,7 @@
 import { about, projetos, certificados } from "../../data/content";
 import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
+import Trajetoria from "./Trajetoria";
 import styles from "./About.module.css";
 
 // Converte **palavra** em <strong> — dá ritmo de leitura (cargos, tempo, nomes).
@@ -54,22 +55,15 @@ export default function About({ onNavigate }) {
       <div className="container">
         <SectionHeading overline={about.overline} title={about.titulo} />
 
-        <div className={styles.grid}>
-          <Reveal className={styles.prose} stagger={0.15}>
-            {about.paragrafos.map((p, i) => (
-              <p key={i}>{renderBold(p)}</p>
-            ))}
-          </Reveal>
+        <Reveal className={styles.prose} stagger={0.15}>
+          {about.paragrafos.map((p, i) => (
+            <p key={i}>{renderBold(p)}</p>
+          ))}
+        </Reveal>
 
-          <Reveal className={styles.marcos} stagger={0.12} start="top 80%">
-            {about.marcos.map((m, i) => (
-              <div className={styles.marco} key={i}>
-                <p className={styles.marcoDe}>{m.de}</p>
-                <p className={styles.marcoPara}>{m.para}</p>
-              </div>
-            ))}
-          </Reveal>
-        </div>
+        {/* A trajetória por níveis entra abaixo dos parágrafos, em largura
+            cheia — o trilho e os cards precisam do espaço todo. */}
+        <Trajetoria />
 
         {/* A formação é curta e a experiência é longa. Os atalhos ficam sob a
             formação para equilibrar as duas colunas — sem buraco de um lado. */}

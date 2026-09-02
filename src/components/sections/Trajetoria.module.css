@@ -1,0 +1,288 @@
+/* TRAJETÓRIA — trilho vertical + um card por nível.
+   Mesma linguagem do resto do site: hairline, véu sutil, acento como cor de
+   ESTADO (nunca bloco saturado). O movimento é contido: opacidade, escala e
+   deslocamento pequeno — nada de bounce, elástico ou rotação. */
+
+.trajetoria {
+  margin-top: clamp(3rem, 7vh, 5rem);
+  /* diâmetro do nó: o trilho e o recuo dos cards se posicionam a partir dele */
+  --no: 3rem;
+}
+
+/* ---- cabeçalho: rótulo à esquerda, medidor à direita ---- */
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding-bottom: clamp(1.25rem, 3vh, 2rem);
+  margin-bottom: clamp(1.75rem, 4vh, 2.75rem);
+  border-bottom: 1px solid var(--ink-600);
+}
+
+.medidor {
+  min-width: min(100%, 16rem);
+}
+.medidorRotulo {
+  font-size: var(--fs-small);
+  color: var(--text-low);
+}
+.medidorNivel {
+  margin-top: 0.15rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-hi);
+  font-variant-numeric: tabular-nums;
+}
+.medidorTrilho {
+  margin-top: 0.7rem;
+  height: 3px;
+  border-radius: 100px;
+  background: var(--ink-600);
+  overflow: hidden;
+}
+.medidorBarra {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transform-origin: left center;
+  /* sem JS (ou em reduced-motion) a barra já nasce cheia no valor final */
+  transform: scaleX(1);
+  background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+}
+
+/* ---- corpo: trilho absoluto + lista ---- */
+.corpo {
+  position: relative;
+}
+
+/* o trilho corre no CENTRO da coluna dos nós */
+.trilho {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--no) / 2);
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--ink-600);
+  pointer-events: none;
+}
+.trilhoPreench {
+  display: block;
+  width: 100%;
+  /* a altura (onde o preenchimento PARA) é medida no JS: centro do nó "atual" */
+  height: 100%;
+  transform-origin: top center;
+  background: linear-gradient(180deg, var(--accent), var(--accent-glow));
+}
+
+.lista {
+  list-style: none;
+  display: grid;
+  gap: clamp(1rem, 2.5vh, 1.75rem);
+}
+
+/* ---- um nível ---- */
+.nivel {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--no) 1fr;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  align-items: start;
+}
+
+/* nó circular com o número */
+.no {
+  position: relative;
+  z-index: 1;
+  width: var(--no);
+  height: var(--no);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--ink-600);
+  background: var(--ink-800);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-low);
+  transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
+    background var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+
+/* traço fino ligando o nó ao card */
+.no::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: clamp(1rem, 2.5vw, 1.75rem);
+  height: 1px;
+  background: var(--ink-600);
+  transition: background var(--dur) var(--ease-out);
+}
+
+/* aceso: o preenchimento do trilho já passou por aqui (classe posta pelo JS) */
+.no.aceso {
+  color: var(--text-hi);
+  border-color: rgba(var(--accent-rgb), 0.55);
+}
+.no.aceso::after {
+  background: rgba(var(--accent-rgb), 0.45);
+}
+
+/* ---- card ---- */
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.15rem, 3vw, 1.6rem) clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid var(--ink-600);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent);
+  transition: border-color var(--dur) var(--ease-out);
+}
+
+.cardTopo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+.periodo {
+  font-size: var(--fs-small);
+  color: var(--text-low);
+  font-variant-numeric: tabular-nums;
+}
+.selo {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-low);
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--ink-600);
+  border-radius: 100px;
+}
+
+.cardTitulo {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.7rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-hi);
+}
+.cardTexto {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-mid);
+  max-width: 62ch;
+}
+
+/* rodapé "GANHEI": as competências como chips */
+.rodape {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ink-600);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.6rem;
+  list-style: none;
+}
+.chip {
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  padding: 0.28rem 0.65rem;
+  border: 1px solid var(--ink-600);
+  border-radius: 100px;
+}
+
+/* número gigante em contorno, atrás do conteúdo.
+   `color: transparent` é obrigatório: sem ele, navegador que não suporte
+   -webkit-text-stroke pinta o número SÓLIDO por cima do card. */
+.fantasma {
+  position: absolute;
+  right: clamp(0.5rem, 2vw, 1.75rem);
+  bottom: -0.35em;
+  z-index: 0;
+  font-size: clamp(4.5rem, 11vw, 8rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(var(--accent-rgb), 0.14);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---- estados ---- */
+/* atual: nó preenchido com o acento + halo, e a borda do card acesa */
+.nivel[data-status="atual"] .no.aceso {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink-900);
+  box-shadow: 0 0 0 6px rgba(var(--accent-rgb), 0.12), 0 0 28px rgba(var(--accent-rgb), 0.35);
+}
+.nivel[data-status="atual"] .card {
+  border-color: rgba(var(--accent-rgb), 0.42);
+}
+.nivel[data-status="atual"] .selo {
+  color: var(--accent-glow);
+  border-color: rgba(var(--accent-rgb), 0.45);
+}
+
+/* próximo: ainda não conquistado — tracejado e recuado */
+.nivel[data-status="proximo"] {
+  opacity: 0.55;
+}
+.nivel[data-status="proximo"] .no {
+  border-style: dashed;
+  background: transparent;
+}
+.nivel[data-status="proximo"] .no::after {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink-600) 0 4px,
+    transparent 4px 8px
+  );
+}
+.nivel[data-status="proximo"] .card {
+  border-style: dashed;
+  background: none;
+}
+
+/* ---- mobile: o trilho encosta na borda e os cards ocupam a largura ---- */
+@media (max-width: 640px) {
+  .trajetoria {
+    --no: 2.25rem;
+  }
+  .nivel {
+    gap: 0.85rem;
+  }
+  .no::after {
+    width: 0.85rem;
+  }
+  .cardTexto {
+    font-size: 0.92rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .no,
+  .no::after,
+  .card {
+    transition: none;
+  }
+}
