@@ -19,7 +19,7 @@ import Preloader from "./components/chrome/Preloader";
 import Nav from "./components/chrome/Nav";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
-import Project from "./components/sections/Project";
+import Portfolio from "./components/sections/Portfolio";
 import Skills from "./components/sections/Skills";
 import Contact from "./components/sections/Contact";
 
@@ -27,7 +27,7 @@ import Contact from "./components/sections/Contact";
 const INTENSITY = {
   hero: 1.25,
   sobre: 1.0,
-  projeto: 0.9,
+  portfolio: 0.9,
   skills: 0.95,
   contato: 1.1,
 };
@@ -136,8 +136,10 @@ export default function App() {
 
       <main>
         <Hero play={loaded} onNavigate={onNavigate} />
-        <About />
-        <Project />
+        <About onNavigate={onNavigate} />
+        {/* onNavigate reenquadra a seção quando o Portfólio troca de vista
+            (abrir/fechar o detalhe de um projeto), usando o mesmo recuo do menu */}
+        <Portfolio onNavigate={onNavigate} />
         <Skills />
         <Contact />
       </main>

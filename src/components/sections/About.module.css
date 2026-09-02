@@ -7,7 +7,7 @@
 
 .prose p {
   font-size: var(--fs-lead);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.55;
   color: var(--text-mid);
   max-width: 42ch;
@@ -59,8 +59,118 @@
   margin-top: 0.35rem;
 }
 
+/* ---- Formação e experiência: duas listas lado a lado ----
+   Formato igual para as duas colunas; item novo é uma linha no content.js. */
+.historicos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-top: clamp(3rem, 7vh, 5rem);
+}
+.linha {
+  margin-top: 1.25rem;
+  border-left: 1px solid var(--ink-600);
+  padding-left: clamp(1.25rem, 3vw, 2rem);
+}
+.item {
+  position: relative;
+  padding-block: clamp(0.9rem, 2.2vh, 1.35rem);
+}
+.item + .item {
+  border-top: 1px solid var(--ink-600);
+}
+/* mesmo fio de acento dos marcos, para as três listas falarem a mesma língua */
+.item::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * clamp(1.25rem, 3vw, 2rem) - 1px);
+  top: clamp(0.9rem, 2.2vh, 1.35rem);
+  width: 1px;
+  height: 1.25rem;
+  background: var(--accent);
+}
+.itemTopo {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-hi);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.itemMeio {
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  margin-top: 0.25rem;
+}
+.itemPeriodo {
+  font-size: var(--fs-small);
+  color: var(--text-low);
+  margin-top: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* coluna da esquerda: formação em cima, atalhos embaixo */
+.coluna {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Atalhos para o Portfólio: o número vem da contagem da lista ---- */
+.atalhos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
+}
+.atalho {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  text-align: left;
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  border: 1px solid var(--ink-600);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent);
+  transition: border-color var(--dur) var(--ease-out);
+}
+.atalho:hover {
+  border-color: rgba(var(--accent-rgb), 0.45);
+}
+.atalhoNumero {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-hi);
+  font-variant-numeric: tabular-nums;
+}
+.atalhoTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.atalhoLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-hi);
+}
+.atalhoNota {
+  font-size: var(--fs-small);
+  color: var(--text-low);
+}
+.atalhoSeta {
+  margin-left: auto;
+  color: var(--accent-glow);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.atalho:hover .atalhoSeta {
+  transform: translate(3px, -3px);
+}
+
 @media (max-width: 860px) {
-  .grid {
+  .grid,
+  .historicos {
     grid-template-columns: 1fr;
   }
 }

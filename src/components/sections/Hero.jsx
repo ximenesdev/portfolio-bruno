@@ -68,11 +68,11 @@ export default function Hero({ play, onNavigate }) {
 
           <div className={styles.ctas}>
             <MagneticButton
-              href="#projeto"
-              onClick={(e) => { e.preventDefault(); onNavigate("projeto"); }}
+              href="#portfolio"
+              onClick={(e) => { e.preventDefault(); onNavigate("portfolio"); }}
               arrow
             >
-              Ver o projeto
+              Ver os projetos
             </MagneticButton>
             <MagneticButton
               href="#contato"
