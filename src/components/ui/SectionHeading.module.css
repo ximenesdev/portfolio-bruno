@@ -20,7 +20,7 @@
 .title {
   font-size: var(--fs-h2);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
   line-height: var(--lh-snug);
   /* medida relativa à fonte GRANDE do próprio título (ch usa o font-size local) */
   max-width: 18ch;

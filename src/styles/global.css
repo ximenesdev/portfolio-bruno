@@ -42,6 +42,17 @@ html.has-custom-cursor button {
   cursor: none;
 }
 
+/* A Inter/SF é mais estreita e mais "seca" que a Poppins: no mesmo corpo, as
+   letras ficam mais soltas. Por isso o tracking aperta mais que antes, e em dois
+   degraus — quanto maior o texto, mais negativo, senão o título "desmancha". */
+h1,
+h2 {
+  letter-spacing: -0.035em;
+}
+h3,
+h4 {
+  letter-spacing: -0.025em;
+}
 h1,
 h2,
 h3,
@@ -49,7 +60,6 @@ h4 {
   color: var(--text-hi);
   font-weight: 600;
   line-height: var(--lh-snug);
-  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -115,7 +125,8 @@ section[id] {
 
 .lead {
   font-size: var(--fs-lead);
-  font-weight: 300;
+  /* servimos a Inter em 400/500/600/700; o 300 cairia no 400 de qualquer jeito */
+  font-weight: 400;
   line-height: var(--lh-normal);
   color: var(--text-mid);
   max-width: 60ch;

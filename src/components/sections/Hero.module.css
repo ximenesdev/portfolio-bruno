@@ -64,7 +64,7 @@
 
 .lead {
   font-size: var(--fs-body);
-  font-weight: 300;
+  font-weight: 400;
   color: var(--text-mid);
   max-width: 48ch;
   margin-bottom: clamp(2rem, 5vh, 3rem);

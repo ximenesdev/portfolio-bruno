@@ -33,8 +33,12 @@
   /* versão em canais r,g,b para compor rgba() de brilhos e bordas */
   --accent-rgb: 232, 118, 60;
 
-  /* ---- Tipografia (somente Poppins, em todo o site) ---- */
-  --font: "Poppins", system-ui, -apple-system, sans-serif;
+  /* ---- Tipografia: uma família só, resolvida por sistema ----
+     Em macOS/iOS o -apple-system entrega a San Francisco nativa (que não pode
+     ser hospedada, por licença); nos demais sistemas cai na Inter que servimos
+     em latin-400/500/600/700. As duas são grotescas neutras de mesma família
+     visual, então o desenho do site não muda de um sistema para o outro. */
+  --font: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
 
   /* Escala fluida com clamp() — tipografia grande e confiante */
   --fs-display: clamp(3rem, 9vw, 8.5rem);
