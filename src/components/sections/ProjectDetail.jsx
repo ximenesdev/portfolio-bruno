@@ -50,15 +50,44 @@ export default function ProjectDetail({ projeto, tituloRef }) {
   const extra = projeto.extra ? EXTRAS[projeto.extra] : null;
   const temShots = projeto.screenshots?.length > 0;
   const casos = projeto.casos ?? [];
+  const temCapa = !!projeto.capa;
+
+  /* O <h3> continua sendo o título do detalhe em qualquer um dos dois casos:
+     é ele que carrega a semântica de cabeçalho E recebe o foco ao abrir (via
+     tituloRef). Com capa ele só muda de LUGAR e de tamanho — vira rótulo ao
+     lado do botão. Trocar por um <span> quebraria leitor de tela e o foco. */
+  const titulo = (
+    <h3
+      className={temCapa ? styles.nomeRotulo : styles.nome}
+      ref={tituloRef}
+      tabIndex={-1} // alvo do foco ao abrir; fora da ordem do Tab
+    >
+      {projeto.nome}
+    </h3>
+  );
 
   return (
     <article>
       <div className={styles.top}>
         <Reveal>
-          {/* tabIndex -1: alvo do foco ao abrir o detalhe (não entra na ordem do Tab) */}
-          <h3 className={styles.nome} ref={tituloRef} tabIndex={-1}>
-            {projeto.nome}
-          </h3>
+          {/* Com capa, ela abre a coluna esquerda no lugar do nome grande.
+              Sem capa, tudo segue exatamente como era. */}
+          {temCapa ? (
+            <div className={styles.capaMoldura}>
+              <img
+                className={styles.capa}
+                src={projeto.capa}
+                alt=""
+                width="1400"
+                height="788"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ) : (
+            titulo
+          )}
+
           {(projeto.contexto || projeto.periodo) && (
             <p className={styles.meta}>
               {[projeto.contexto, projeto.periodo].filter(Boolean).join(" · ")}
@@ -67,6 +96,7 @@ export default function ProjectDetail({ projeto, tituloRef }) {
           <p className={styles.tagline}>{projeto.tagline}</p>
 
           <div className={styles.acoes}>
+            {temCapa && titulo}
             {(projeto.links ?? []).map((l) => (
               <MagneticButton
                 key={l.href}
