@@ -17,7 +17,7 @@
   /* ---- Texto ---- */
   --text-hi: #f5f2f7;  /* títulos: contraste altíssimo sobre o ink */
   --text-mid: #b2abc0; /* parágrafos */
-  --text-low: #6c6680; /* overlines, metadados */
+  --text-low: #817b96; /* overlines, metadados; 4,96:1 no ink-900 e 4,55:1 no ink-700 (WCAG AA) */
 
   /* ---- Acentos (core + glow). Sempre acento, nunca bloco sólido saturado ---- */
   --amber: #e8763c;
