@@ -131,9 +131,14 @@ export default function Portfolio({ onNavigate }) {
      useLayoutEffect de propósito: o DOM novo já está montado e o navegador ainda
      não pintou, então nunca aparece um quadro com as posições erradas.
 
-     `onNavigate` fica FORA das deps de propósito: é recriada a cada render do App,
-     que re-renderiza a cada troca de seção ativa no scroll — incluí-la dispararia
+     `onNavigate` é lida de uma ref, não das deps: é recriada a cada render do App,
+     que re-renderiza a cada troca de seção ativa no scroll — como dep, dispararia
      refresh dezenas de vezes por rolagem. */
+  const onNavigateRef = useRef(onNavigate);
+  useLayoutEffect(() => {
+    onNavigateRef.current = onNavigate;
+  }, [onNavigate]);
+
   useLayoutEffect(() => {
     if (trocaInicial.current) {
       trocaInicial.current = false; // no mount não há o que recalcular nem reenquadrar
@@ -142,7 +147,7 @@ export default function Portfolio({ onNavigate }) {
     ScrollTrigger.refresh();
     if (reenquadrar.current) {
       reenquadrar.current = false;
-      onNavigate?.("portfolio"); // depois do refresh: recalcula, só então rola
+      onNavigateRef.current?.("portfolio"); // depois do refresh: recalcula, só então rola
     }
   }, [abertoId, abaAtiva]);
 

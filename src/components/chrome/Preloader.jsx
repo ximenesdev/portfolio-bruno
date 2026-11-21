@@ -28,18 +28,25 @@ export default function Preloader({ onDone }) {
   const rootRef = useRef(null);
   const done = useRef(false);
 
-  const finish = () => {
-    if (done.current) return;
-    done.current = true;
-    try {
-      sessionStorage.setItem("bx_loaded", "1");
-    } catch {
-      /* ignora */
-    }
-    onDone?.();
-  };
+  // O App passa onDone como arrow nova a cada render. Guardar a versão mais
+  // recente numa ref deixa a animação rodar uma vez só, sem perder o callback.
+  const onDoneRef = useRef(onDone);
+  useLayoutEffect(() => {
+    onDoneRef.current = onDone;
+  }, [onDone]);
 
   useLayoutEffect(() => {
+    const finish = () => {
+      if (done.current) return;
+      done.current = true;
+      try {
+        sessionStorage.setItem("bx_loaded", "1");
+      } catch {
+        /* ignora */
+      }
+      onDoneRef.current?.();
+    };
+
     if (mode.current === "skip") {
       finish();
       return;

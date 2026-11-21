@@ -36,7 +36,7 @@ export default function Reveal({
     }, ref);
 
     return () => ctx.revert();
-  }, []);
+  }, [y, delay, stagger, start]);
 
   return (
     <Tag ref={ref} className={className} {...rest}>

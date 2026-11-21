@@ -125,7 +125,7 @@ export default function Trajetoria() {
       ScrollTrigger.removeEventListener("refresh", medirTrilho);
       ctx.revert();
     };
-  }, []);
+  }, [iAtual, total, pct]);
 
   if (!total) return null;
 
